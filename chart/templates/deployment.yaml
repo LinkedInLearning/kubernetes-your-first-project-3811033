@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Chart.Name }}-{{ .Release.Name }}
+  name: {{ .Chart.Name }}-{{ .Release.Name }}
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: {{ .Values.replicas }}
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-{{ .Release.Name }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ .Chart.Name }}-{{ .Release.Name }}
+    spec:
+      containers:
+      - image: {{ .Values.image.name }} 
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: {{ .Chart.Name }}-{{ .Release.Name }}
+        ports:
+        - containerPort: {{ .Values.ports.source }}
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
