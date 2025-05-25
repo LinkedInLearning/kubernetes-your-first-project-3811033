@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Chart.Name }}-{{ .Release.Name }}
+  name: {{ .Chart.Name }}-{{ .Release.Name }}
+  namespace: default
+spec:
+  ports:
+  - name: {{ .Values.ports.service }}-{{ .Values.ports.source }}
+    port:  {{ .Values.ports.service }}
+    protocol: TCP
+    targetPort: {{ .Values.ports.source }}
+  selector:
+    app: {{ .Chart.Name }}-{{ .Release.Name }}
+  sessionAffinity: None
+  type: ClusterIP

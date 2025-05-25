@@ -4,3 +4,7 @@ image:
   pullPolicy: IfNotPresent
 ports:
   source: 80
+  service: 80
+ingress:
+  host: explorecalifornia.local
+  tlsSecret: explorecalifornia-tls-data
