@@ -8,7 +8,7 @@ LABEL maintainer="Carlos Nunez <dev@carlosnunez.me>"
 
 # COPY, well, copies stuff! Note that files/directories are copied from the directory
 # specified at the **end** of `docker build` or `podman build`
-COPY website /usr/share/nginx/website
+COPY website-b /usr/share/nginx/website
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # EXPOSE lets you tell users what ports they should expose when they create containers
