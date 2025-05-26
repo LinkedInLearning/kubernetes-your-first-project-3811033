@@ -14,7 +14,7 @@ spec:
           service:
             name: {{ .Chart.Name }}-{{ .Release.Name }}
             port:
-              number: {{ .Values.ports.source }}
+              number: {{ .Values.ports.service }}
         path: /
         pathType: Prefix
   tls:
