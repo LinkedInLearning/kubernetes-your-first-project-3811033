@@ -1,0 +1,7 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ .Values.ingress.issuerName }}
+  namespace: default
+spec:
+  selfSigned: {}
